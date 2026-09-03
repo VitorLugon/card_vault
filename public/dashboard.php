@@ -21,7 +21,7 @@ $user = Auth::user();
     <title>Painel - CardVault</title>
     <meta name="csrf-token" content="<?= htmlspecialchars(Csrf::token(), ENT_QUOTES, 'UTF-8') ?>">
     <link rel="stylesheet" href="/assets/css/app.css?v=4.1">
-    <script src="/assets/js/cards.js?v=4.1" defer></script>
+    <script src="/assets/js/cards.js?v=4.2" defer></script>
 </head>
 <body class="dashboard-page">
     <header class="topbar">
@@ -142,14 +142,9 @@ $user = Auth::user();
 
                 <label class="field form-grid__full">
                     <span>Raridade</span>
-                    <input id="rarity" name="rarity" list="rarity-suggestions" maxlength="60" required>
-                    <datalist id="rarity-suggestions">
-                        <option value="Comum"></option>
-                        <option value="Incomum"></option>
-                        <option value="Rara"></option>
-                        <option value="Mítica"></option>
-                        <option value="Promo"></option>
-                    </datalist>
+                    <select id="rarity" name="rarity" required disabled>
+                        <option value="">Selecione o card game primeiro</option>
+                    </select>
                     <small class="field-error" data-error-for="rarity"></small>
                 </label>
 

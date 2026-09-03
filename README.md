@@ -47,6 +47,30 @@ Para encerrar os contêineres, pressione `Ctrl + C` no terminal ou execute
 
 Essas credenciais são exclusivas para o ambiente local do desafio.
 
+## Dados opcionais de demonstração
+
+O banco inicia sem cartas para que o estado vazio e o fluxo de cadastro possam ser
+avaliados. Se quiser visualizar a listagem preenchida, execute:
+
+```bash
+docker compose exec -T app php database/demo.php install
+```
+
+O comando adiciona uma carta real de cada card game e baixa as respectivas imagens
+para a pasta local de uploads. Por isso, a primeira execução precisa de conexão com a
+internet. As execuções seguintes reutilizam os arquivos e não duplicam os registros.
+
+As imagens são usadas somente para demonstração e pertencem aos respectivos titulares.
+Fontes: [Scryfall](https://scryfall.com/),
+[Pokémon TCG API](https://pokemontcg.io/) e
+[YGOPRODeck](https://ygoprodeck.com/api-guide/).
+
+Para remover somente esses exemplos e preservar as cartas cadastradas manualmente:
+
+```bash
+docker compose exec -T app php database/demo.php remove
+```
+
 ## Autenticação
 
 O login consulta o usuário pelo e-mail e compara a senha com o hash armazenado no
@@ -96,18 +120,18 @@ bibliotecas, frameworks, fontes ou outros recursos externos.
 ## Estrutura inicial
 
 ```text
-database/        scripts de schema e seed do MySQL
-data/            catálogo de edições fornecido no desafio
-docker/php/      imagem PHP usada no ambiente local
-public/api/      endpoints JSON e entrega protegida das imagens
-public/assets/   estilos e JavaScript vanilla da interface
-public/          raiz pública servida pelo Apache
-src/Auth/        autenticação e dados da sessão do usuário
-src/Cards/       validação, persistência e arquivos das cartas
-src/Config/      configuração da conexão com o banco
-src/Http/        respostas JSON e proteção das requisições da API
-src/Security/    proteção dos formulários com token CSRF
-uploads/cards/   imagens enviadas no cadastro de cartas
+database/             scripts de schema, seed e dados opcionais do MySQL
+data/                 catálogo de edições fornecido no desafio
+docker/php/           imagem PHP usada no ambiente local
+public/api/           endpoints JSON e entrega protegida das imagens
+public/assets/        estilos e JavaScript vanilla da interface
+public/               raiz pública servida pelo Apache
+src/Auth/             autenticação e dados da sessão do usuário
+src/Cards/            validação, persistência e arquivos das cartas
+src/Config/           configuração da conexão com o banco
+src/Http/             respostas JSON e proteção das requisições da API
+src/Security/         proteção dos formulários com token CSRF
+uploads/cards/        imagens enviadas no cadastro de cartas
 ```
 
 ## Decisões de UX e produto

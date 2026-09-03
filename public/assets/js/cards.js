@@ -19,6 +19,7 @@
     const formFeedback = document.querySelector('#form-feedback');
     const gameInput = document.querySelector('#game');
     const editionInput = document.querySelector('#edition');
+    const rarityInput = document.querySelector('#rarity');
     const imageInput = document.querySelector('#image');
     const imageHint = document.querySelector('#image-hint');
     const imagePreviewContainer = document.querySelector('#image-preview-container');
@@ -28,6 +29,12 @@
     const deleteDescription = document.querySelector('#delete-dialog-description');
     const confirmDeleteButton = document.querySelector('#confirm-delete');
     const toast = document.querySelector('#toast');
+
+    const raritiesByGame = {
+        magic: ['Comum', 'Incomum', 'Rara', 'Mítica'],
+        pokemon: ['Comum', 'Incomum', 'Rara', 'Rara holográfica', 'Ultra rara', 'Promo'],
+        yugioh: ['Comum', 'Rara', 'Super rara', 'Ultra rara', 'Secreta'],
+    };
 
     const state = {
         cards: [],
@@ -47,7 +54,10 @@
     confirmDeleteButton.addEventListener('click', deleteCard);
     searchInput.addEventListener('input', applyFilters);
     gameFilter.addEventListener('change', applyFilters);
-    gameInput.addEventListener('change', () => loadEditions(gameInput.value));
+    gameInput.addEventListener('change', () => {
+        loadEditions(gameInput.value);
+        loadRarities(gameInput.value);
+    });
     imageInput.addEventListener('change', updateImagePreview);
     cardForm.addEventListener('submit', saveCard);
     cardsGrid.addEventListener('click', handleCardAction);
@@ -183,6 +193,7 @@
         cardForm.reset();
         clearFormErrors();
         resetEditionInput();
+        resetRarityInput();
         clearImagePreview();
         cardDialogTitle.textContent = 'Nova carta';
         saveButton.textContent = 'Salvar carta';
@@ -200,8 +211,8 @@
 
         document.querySelector('#name-en').value = card.name_en;
         document.querySelector('#name-pt').value = card.name_pt || '';
-        document.querySelector('#rarity').value = card.rarity;
         gameInput.value = card.game;
+        loadRarities(card.game, card.rarity);
         imageInput.required = false;
         imageHint.textContent = 'Envie outra imagem apenas se quiser substituir a atual.';
         cardDialogTitle.textContent = 'Editar carta';
@@ -254,6 +265,26 @@
         state.editionRequestId += 1;
         editionInput.disabled = true;
         editionInput.replaceChildren(createOption('', 'Selecione o card game primeiro'));
+    }
+
+    function loadRarities(game, selectedRarity = '') {
+        const rarities = raritiesByGame[game] || [];
+        rarityInput.replaceChildren(createOption('', game ? 'Selecione uma raridade' : 'Selecione o card game primeiro'));
+        rarityInput.disabled = rarities.length === 0;
+
+        rarities.forEach((rarity) => rarityInput.append(createOption(rarity, rarity)));
+
+        if (selectedRarity !== '' && !rarities.includes(selectedRarity)) {
+            rarityInput.append(createOption(selectedRarity, selectedRarity));
+        }
+
+        rarityInput.value = selectedRarity;
+        clearFieldError('rarity');
+    }
+
+    function resetRarityInput() {
+        rarityInput.disabled = true;
+        rarityInput.replaceChildren(createOption('', 'Selecione o card game primeiro'));
     }
 
     async function saveCard(event) {
