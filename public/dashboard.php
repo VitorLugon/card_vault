@@ -47,7 +47,7 @@ $user = Auth::user();
             <span class="next-step__number">03</span>
             <div>
                 <h2>Gerenciamento de cartas</h2>
-                <p>A listagem e o cadastro serão adicionados na próxima etapa.</p>
+                <p>A API está pronta. A listagem e o formulário visual entram na próxima etapa.</p>
             </div>
         </section>
     </main>

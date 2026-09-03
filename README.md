@@ -8,7 +8,7 @@ puros no front-end.
 
 - [x] Etapa 1 - ambiente, conexão com o banco, schema e seed
 - [x] Etapa 2 - autenticação e sessão do usuário
-- [ ] Etapa 3 - API e regras do CRUD de cartas
+- [x] Etapa 3 - API e regras do CRUD de cartas
 - [ ] Etapa 4 - interface administrativa responsiva
 - [ ] Etapa 5 - testes manuais, revisão e documentação final
 
@@ -64,14 +64,37 @@ Rotas disponíveis nesta etapa:
 - `/logout.php` - encerramento da sessão por `POST`;
 - `/health.php` - verificação simples da aplicação e do banco.
 
+## API de cartas
+
+Todos os endpoints da API exigem uma sessão autenticada. As operações que alteram
+dados também exigem o token CSRF no campo `csrf_token` ou no cabeçalho
+`X-CSRF-Token`.
+
+- `GET /api/editions.php?game=magic` - lista as edições do jogo informado;
+- `GET /api/cards.php` - lista todas as cartas;
+- `GET /api/cards.php?id=1` - consulta uma carta;
+- `POST /api/cards.php` - cadastra uma carta;
+- `POST /api/cards.php?id=1` com `_method=PUT` - atualiza uma carta;
+- `POST /api/cards.php?id=1` com `_method=DELETE` - exclui uma carta;
+- `GET /api/card-image.php?id=1` - entrega a imagem de uma carta.
+
+O cadastro recebe `name_en`, `name_pt` opcional, `game`, `edition_id`, `rarity` e
+`image`. A edição precisa pertencer ao jogo selecionado. Imagens são limitadas a
+5 MB e aos formatos JPG, PNG e WebP. Ao atualizar uma carta, a imagem só é trocada
+quando um novo arquivo é enviado.
+
 ## Estrutura inicial
 
 ```text
 database/        scripts de schema e seed do MySQL
+data/            catálogo de edições fornecido no desafio
 docker/php/      imagem PHP usada no ambiente local
+public/api/      endpoints JSON e entrega protegida das imagens
 public/          raiz pública servida pelo Apache
 src/Auth/        autenticação e dados da sessão do usuário
+src/Cards/       validação, persistência e arquivos das cartas
 src/Config/      configuração da conexão com o banco
+src/Http/        respostas JSON e proteção das requisições da API
 src/Security/    proteção dos formulários com token CSRF
 uploads/cards/   imagens enviadas no cadastro de cartas
 ```

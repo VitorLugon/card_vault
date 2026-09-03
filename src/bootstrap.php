@@ -5,6 +5,13 @@ declare(strict_types=1);
 require_once __DIR__ . '/Config/Database.php';
 require_once __DIR__ . '/Auth/Auth.php';
 require_once __DIR__ . '/Security/Csrf.php';
+require_once __DIR__ . '/Http/JsonResponse.php';
+require_once __DIR__ . '/Http/ApiRequest.php';
+require_once __DIR__ . '/Cards/EditionCatalog.php';
+require_once __DIR__ . '/Cards/CardValidator.php';
+require_once __DIR__ . '/Cards/CardRepository.php';
+require_once __DIR__ . '/Cards/ImageStorage.php';
+require_once __DIR__ . '/Cards/CardPresenter.php';
 
 if (session_status() !== PHP_SESSION_ACTIVE) {
     $isHttps = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off';
