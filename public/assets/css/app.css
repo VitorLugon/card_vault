@@ -1,0 +1,291 @@
+:root {
+    color-scheme: light;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: #f4f6fa;
+    color: #172033;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    background: #f4f6fa;
+}
+
+button,
+input {
+    font: inherit;
+}
+
+a {
+    color: inherit;
+}
+
+.eyebrow {
+    margin: 0 0 10px;
+    color: #6651d7;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.panel {
+    border: 1px solid #dfe4ed;
+    border-radius: 20px;
+    background: #ffffff;
+    box-shadow: 0 18px 50px rgb(34 48 74 / 10%);
+}
+
+.auth-page {
+    display: grid;
+    padding: 28px;
+    place-items: center;
+}
+
+.auth-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(340px, 430px);
+    gap: clamp(40px, 8vw, 110px);
+    align-items: center;
+    width: min(100%, 1040px);
+}
+
+.auth-intro h1 {
+    max-width: 650px;
+    margin: 0;
+    font-size: clamp(2.6rem, 6vw, 4.8rem);
+    line-height: 0.98;
+    letter-spacing: -0.05em;
+}
+
+.auth-intro > p:last-child {
+    max-width: 520px;
+    margin: 24px 0 0;
+    color: #626c7d;
+    font-size: 1.08rem;
+    line-height: 1.7;
+}
+
+.auth-panel {
+    display: grid;
+    gap: 24px;
+    padding: 36px;
+}
+
+.auth-panel h2 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+.muted {
+    margin: 7px 0 0;
+    color: #6b7484;
+}
+
+.form {
+    display: grid;
+    gap: 18px;
+}
+
+.field {
+    display: grid;
+    gap: 8px;
+    font-size: 0.92rem;
+    font-weight: 700;
+}
+
+.field input {
+    width: 100%;
+    padding: 13px 14px;
+    border: 1px solid #cbd2de;
+    border-radius: 10px;
+    outline: none;
+    color: #172033;
+    background: #ffffff;
+    transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.field input:focus {
+    border-color: #6651d7;
+    box-shadow: 0 0 0 4px rgb(102 81 215 / 14%);
+}
+
+.button {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 18px;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 750;
+    text-decoration: none;
+}
+
+.button:focus-visible {
+    outline: 3px solid rgb(102 81 215 / 25%);
+    outline-offset: 2px;
+}
+
+.button--primary {
+    color: #ffffff;
+    background: #6651d7;
+}
+
+.button--primary:hover {
+    background: #5743c5;
+}
+
+.button--secondary {
+    border-color: #d3d9e3;
+    color: #3c4658;
+    background: #ffffff;
+}
+
+.button--secondary:hover {
+    background: #f4f6fa;
+}
+
+.feedback {
+    margin: 0;
+    padding: 12px 14px;
+    border-radius: 10px;
+    font-size: 0.92rem;
+    line-height: 1.45;
+}
+
+.feedback--error {
+    color: #9f251b;
+    background: #fff0ee;
+}
+
+.feedback--success {
+    color: #176b40;
+    background: #eaf8f0;
+}
+
+.topbar {
+    display: flex;
+    min-height: 76px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 14px clamp(22px, 5vw, 72px);
+    border-bottom: 1px solid #e1e5ed;
+    background: #ffffff;
+}
+
+.brand {
+    color: #3d2ca2;
+    font-size: 1.25rem;
+    font-weight: 850;
+    text-decoration: none;
+}
+
+.account {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.account > div {
+    display: grid;
+    gap: 2px;
+    text-align: right;
+}
+
+.account span {
+    color: #70798a;
+    font-size: 0.82rem;
+}
+
+.dashboard {
+    width: min(100% - 40px, 1050px);
+    margin: 72px auto;
+}
+
+.dashboard h1 {
+    margin: 0;
+    font-size: clamp(2.2rem, 6vw, 4rem);
+    letter-spacing: -0.04em;
+}
+
+.dashboard__lead {
+    max-width: 650px;
+    margin: 16px 0 36px;
+    color: #626c7d;
+    font-size: 1.06rem;
+    line-height: 1.65;
+}
+
+.next-step {
+    display: flex;
+    gap: 22px;
+    align-items: center;
+    padding: 28px;
+}
+
+.next-step__number {
+    display: grid;
+    flex: 0 0 58px;
+    height: 58px;
+    border-radius: 16px;
+    place-items: center;
+    color: #ffffff;
+    background: #6651d7;
+    font-weight: 850;
+}
+
+.next-step h2,
+.next-step p {
+    margin: 0;
+}
+
+.next-step p {
+    margin-top: 6px;
+    color: #6b7484;
+}
+
+@media (max-width: 760px) {
+    .auth-layout {
+        grid-template-columns: 1fr;
+        gap: 36px;
+    }
+
+    .auth-intro h1 {
+        font-size: clamp(2.4rem, 12vw, 4rem);
+    }
+
+    .account > div {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .auth-page {
+        align-items: start;
+        padding: 24px 16px;
+    }
+
+    .auth-panel {
+        padding: 26px 22px;
+    }
+
+    .topbar {
+        padding-inline: 18px;
+    }
+
+    .dashboard {
+        width: min(100% - 32px, 1050px);
+        margin-top: 48px;
+    }
+
+    .next-step {
+        align-items: flex-start;
+    }
+}
