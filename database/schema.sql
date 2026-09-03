@@ -1,0 +1,28 @@
+CREATE DATABASE IF NOT EXISTS tcg_collection
+    CHARACTER SET utf8mb4
+    COLLATE utf8mb4_unicode_ci;
+
+USE tcg_collection;
+
+CREATE TABLE users (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(190) NOT NULL UNIQUE,
+    password_hash VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE cards (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name_en VARCHAR(150) NOT NULL,
+    name_pt VARCHAR(150) NULL,
+    game ENUM('magic', 'pokemon', 'yugioh') NOT NULL,
+    edition_id VARCHAR(50) NOT NULL,
+    image_path VARCHAR(255) NOT NULL,
+    rarity VARCHAR(60) NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX idx_cards_game (game),
+    INDEX idx_cards_name_en (name_en)
+);
