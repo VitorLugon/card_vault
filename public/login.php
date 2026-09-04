@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $csrfToken = isset($_POST['csrf_token']) ? (string) $_POST['csrf_token'] : null;
 
     if (!Csrf::validate($csrfToken)) {
-        http_response_code(419);
+        http_response_code(403);
         $error = 'Sua sessão expirou. Atualize a página e tente novamente.';
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL) || $password === '') {
         $error = 'Informe um e-mail válido e a senha.';

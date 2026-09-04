@@ -21,7 +21,7 @@ final class ApiRequest
         $token = $_SERVER['HTTP_X_CSRF_TOKEN'] ?? $_POST['csrf_token'] ?? null;
 
         if (!Csrf::validate(is_string($token) ? $token : null)) {
-            JsonResponse::send(['message' => 'Sua sessão expirou. Atualize a página e tente novamente.'], 419);
+            JsonResponse::send(['message' => 'Sua sessão expirou. Atualize a página e tente novamente.'], 403);
         }
     }
 }

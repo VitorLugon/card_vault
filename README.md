@@ -4,15 +4,17 @@ Portal administrativo para cadastro e gerenciamento de cartas de Magic: The Gath
 Pokémon e Yu-Gi-Oh!. O projeto usa PHP e MySQL no back-end e HTML, CSS e JavaScript
 puros no front-end.
 
+[Acessar o repositório no GitHub](https://github.com/VitorLugon/card_vault)
+
 ## Progresso
 
 - [x] Etapa 1 - ambiente, conexão com o banco, schema e seed
 - [x] Etapa 2 - autenticação e sessão do usuário
 - [x] Etapa 3 - API e regras do CRUD de cartas
 - [x] Etapa 4 - interface administrativa responsiva
-- [ ] Etapa 5 - testes manuais, revisão e documentação final
+- [x] Etapa 5 - testes manuais, revisão e documentação final
 
-## Como executar a etapa atual
+## Como executar o projeto
 
 ### Pré-requisitos
 
@@ -26,13 +28,14 @@ puros no front-end.
 2. Execute `docker compose up --build`.
 3. Acesse `http://localhost:8080`.
 
+Ao abrir `http://localhost:8080`, o sistema direciona o visitante para a tela de login
+ou para o painel, caso já exista uma sessão válida. O endpoint
+`http://localhost:8080/health.php` pode ser usado para conferir se a aplicação iniciou
+e conseguiu se conectar ao MySQL.
+
 Se a porta `8080` já estiver ocupada, defina outro valor para `APP_PORT` e ajuste
 `APP_URL` no arquivo `.env`. Por exemplo, use `APP_PORT=8081` e acesse
 `http://localhost:8081`.
-
-Quando o ambiente estiver correto, a página inicial exibirá o banco como conectado.
-Ao abrir `http://localhost:8080`, o sistema direcionará o visitante para a tela de
-login ou para o painel, caso já exista uma sessão válida.
 
 Para encerrar os contêineres, pressione `Ctrl + C` no terminal ou execute
 `docker compose down` em outro terminal.
@@ -81,7 +84,7 @@ O painel exige uma sessão válida. O logout aceita somente requisições `POST`
 como o login, utiliza um token CSRF. As mensagens de erro não informam se foi o e-mail
 ou a senha que estava incorreto.
 
-Rotas disponíveis nesta etapa:
+Rotas principais:
 
 - `/login.php` - entrada do usuário;
 - `/dashboard.php` - área protegida;
@@ -117,7 +120,7 @@ os erros devolvidos pela API junto aos campos correspondentes.
 Todo o comportamento foi escrito em JavaScript vanilla. A interface não carrega
 bibliotecas, frameworks, fontes ou outros recursos externos.
 
-## Estrutura inicial
+## Estrutura do projeto
 
 ```text
 database/             scripts de schema, seed e dados opcionais do MySQL
@@ -133,6 +136,20 @@ src/Http/             respostas JSON e proteção das requisições da API
 src/Security/         proteção dos formulários com token CSRF
 uploads/cards/        imagens enviadas no cadastro de cartas
 ```
+
+## Validação final
+
+Antes da entrega foram verificados:
+
+- login válido, credenciais incorretas, proteção de sessão e logout;
+- proteção CSRF nas operações que alteram dados;
+- carregamento e reset das edições ao trocar o card game;
+- cadastro, consulta, edição e exclusão de cartas;
+- validação da relação entre jogo e edição e do formato da imagem;
+- busca, filtro, estados de loading, vazio e erro;
+- apresentação responsiva em desktop, tablet e celular;
+- sintaxe de todos os arquivos PHP, do JavaScript e do JSON de edições;
+- ausência de frameworks ou bibliotecas externas no front-end.
 
 ## Decisões de UX e produto
 

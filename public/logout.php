@@ -20,7 +20,7 @@ if (!Auth::check()) {
 $csrfToken = isset($_POST['csrf_token']) ? (string) $_POST['csrf_token'] : null;
 
 if (!Csrf::validate($csrfToken)) {
-    http_response_code(419);
+    http_response_code(403);
     exit('Sua sessão expirou. Volte ao painel e tente novamente.');
 }
 
